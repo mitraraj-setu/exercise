@@ -35,3 +35,6 @@ insert into item_mast values
 select *
 from item_mast item
 join company_mast com on com.id=item.com_id;
+
+
+-- test
