@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<odoo>
+
+        <record id="university_teacher_tree_view" model="ir.ui.view">
+            <field name="name">university.teacher.tree</field>
+            <field name="model">university.teacher</field>
+            <field name="arch" type="xml">
+                <tree string="Teach" expand="True">
+                    <field name="code"/>
+                    <field name="firstname"/>
+                    <field name="lastname"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="date_of_birth" optional="hide"/>
+                    <field name="joining_date" optional="hide"/>
+                    <field name="subject"/>
+                    <field name="teacher_aadhaar_no" optional="hide"/>
+                    <field name="student_pass_ratio"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="university_teacher_form_view" model="ir.ui.view">
+            <field name="name">university.teacher.form</field>
+            <field name="model">university.teacher</field>
+            <field name="arch" type="xml">
+                <form string="Teacher">
+                    <sheet>
+                        <h1>
+                            <field name="code"/>
+                        </h1>
+                        <separator/>
+                        <group>
+                            <group>
+                                <field name="firstname"/>
+                                <field name="phone"/>
+                                <field name="date_of_birth"/>
+                                <field name="subject"/>
+                                <field name="student_pass_ratio"/>
+                            </group>
+                            <group>
+                                <field name="lastname"/>
+                                <field name="email"/>
+                                <field name="joining_date"/>
+                                <field name="teacher_aadhaar_no"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="university_teacher_action" model="ir.actions.act_window">
+            <field name="name">Teachers</field>
+            <field name="res_model">university.teacher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="university_teacher_root_menu" name="University Teacher" action="university_teacher_action"/>
+
+</odoo>

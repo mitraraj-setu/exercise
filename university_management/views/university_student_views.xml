@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<odoo>
+
+        <record id="university_student_tree_view" model="ir.ui.view">
+            <field name="name">university.student.tree</field>
+            <field name="model">university.student</field>
+            <field name="arch" type="xml">
+                <tree expand="True">
+                    <field name="enrollment_no"/>
+                    <field name="firstname"/>
+                    <field name="lastname"/>
+                    <field name="guardian_name"/>
+                    <field name="standard"/>
+                    <field name="phone"/>
+                    <field name="guardian_contact" optional="hide"/>
+                    <field name="email"/>
+                    <field name="date_of_birth"/>
+                    <field name="joining_date" optional="hide"/>
+                    <field name="student_aadhaar_no" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="university_student_form_view" model="ir.ui.view">
+            <field name="name">university.student.form</field>
+            <field name="model">university.student</field>
+            <field name="arch" type="xml">
+                <form string="Student">
+                    <sheet>
+                        <h1>
+                            <field name="enrollment_no"/>
+                        </h1>
+                        <separator/>
+                        <group>
+                            <group>
+                                <field name="firstname"/>
+                                <field name="teacher_ids" widget="many2many_tags"/>
+                                <field name="badge_ids" widget="many2many_tags"/>
+                                <field name="phone"/>
+                                <field name="joining_date"/>
+                            </group>
+                            <group>
+                                <field name="lastname"/>
+                                <field name="standard"/>
+                                <field name="guardian_contact"/>
+                                <field name="student_aadhaar_no"/>
+                            </group>
+                            <group>
+                                <field name="guardian_name"/>
+                                <field name="date_of_birth"/>
+                                <field name="email"/>
+                            </group>
+                            <notebook>
+                                <page string="Report">
+                                    <group>
+                                        <field name="mathematics" string="Mathematics"/>
+                                        <field name="science" string="Science"/>
+                                        <field name="social_science" string="Social Science"/>
+                                        <field name="english" string="English"/>
+                                        <field name="hindi" string="Hindi"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_marks" string="Total Marks"/>
+                                        <field name="percentage" string="Percentage"/>
+                                        <field name="result" string="Result"/>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="university_student_count_action" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">university.student</field>
+            <field name="domain">[('badge_id', '=', active_id)]</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="university_student_action" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">university.student</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="university_student_root_menu" name="University Student" action="university_student_action"/>
+
+</odoo>
