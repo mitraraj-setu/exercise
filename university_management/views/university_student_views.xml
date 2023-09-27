@@ -80,7 +80,7 @@
         <record id="university_student_count_action" model="ir.actions.act_window">
             <field name="name">Students</field>
             <field name="res_model">university.student</field>
-            <field name="domain">[('badge_id', '=', active_id)]</field>
+            <field name="domain">[('badge_ids', '=', active_id)]</field>
             <field name="view_mode">tree,form</field>
         </record>
 
