@@ -8,8 +8,8 @@ class UniversityStudentBadge(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Badge')
-    student_count = fields.Integer(string='Students', compute='_compute_student_count', store=True)
 
+    student_count = fields.Integer(string='Students', compute='_compute_student_count', store=True)
     student_ids = fields.One2many('university.student', 'badge_ids')
 
     _sql_constraints = [

@@ -29,7 +29,8 @@ class UniversityStudent(models.Model):
     percentage = fields.Float(string='Percentage', compute='_compute_percentage', store=True)
     result = fields.Char(string='Result', compute='_compute_result', store=True)
 
-    teacher_ids = fields.Many2many('university.teacher', string='Teachers')
+    teacher_count = fields.Integer(string='Teachers', compute='_compute_teacher_count')
+    teacher_ids = fields.Many2many('university.teacher', 'teacher_student_rel', string='Teachers')
     badge_ids = fields.Many2many('university.student.badge')
 
     _sql_constraints = [
@@ -55,6 +56,16 @@ class UniversityStudent(models.Model):
                 record.result = 'Pass'
             else:
                 record.result = 'Fail'
+
+    @api.depends('teacher_ids')
+    def _compute_teacher_count(self):
+        self.teacher_count = len(self.teacher_ids)
+
+    def button_university_teacher_count(self):
+        action = self.env['ir.actions.act_window']._for_xml_id('university_management.university_teacher_count_action')
+        # action['context'] = {'active_test': False}
+        action['domain'] = [('id', 'in', self.teacher_ids.ids)]
+        return action
 
     def name_get(self):
         result = []
