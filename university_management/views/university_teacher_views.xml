@@ -50,15 +50,15 @@
                         <div name="button_box" class="oe_button_box">
                             <button class="oe_stat_button" type="object" string="Pass" name="button_university_pass_student_count"
                                     attrs="{'invisible': [('pass_students_count', '=', 0)]}" icon="fa-file-text-o">
-                                <field name="pass_students_count"/>
+                                <field name="pass_students_count" string="Pass" widget="statinfo"/>
                             </button>
                             <button class="oe_stat_button" type="object" string="Fail" name="button_university_fail_student_count"
                                     attrs="{'invisible': [('fail_students_count', '=', 0)]}" icon="fa-file-text-o">
-                                <field name="fail_students_count"/>
+                                <field name="fail_students_count" string="Fail" widget="statinfo"/>
                             </button>
                             <button class="oe_stat_button" type="object" string="Total Students" name="button_university_total_student_count"
                                     attrs="{'invisible': [('total_students_count', '=', 0)]}" icon="fa-file-text-o">
-                                <field name="total_students_count"/>
+                                <field name="total_students_count" string="Total Students" widget="statinfo"/>
                             </button>
                         </div>
                         <separator/>
