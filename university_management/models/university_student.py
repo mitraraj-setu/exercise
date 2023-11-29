@@ -19,43 +19,35 @@ class UniversityStudent(models.Model):
     student_aadhaar_no = fields.Char(string='Student Aadhaar No', copy=False)
 
     joining_date = fields.Date(string='Student Joining Date')
-    standard = fields.Integer(string='Standard')
-    mathematics = fields.Float(string='Maths')
-    science = fields.Float(string='Science')
-    social_science = fields.Float(string='Social Science')
-    english = fields.Float(string='English')
-    hindi = fields.Float(string='Hindi')
-    total_marks = fields.Float(string='Total Marks', compute='_compute_total_marks', store=True)
-    percentage = fields.Float(string='Percentage', compute='_compute_percentage', store=True)
-    result = fields.Char(string='Result', compute='_compute_result', store=True)
 
     teacher_count = fields.Integer(string='Teachers', compute='_compute_teacher_count')
     teacher_ids = fields.Many2many('university.teacher', 'teacher_student_rel', string='Teachers')
     badge_ids = fields.Many2many('university.student.badge')
+    result_ids = fields.One2many('university.student.result', 'student_id')
 
     _sql_constraints = [
         ('check_student_aadhaar_no', 'unique(student_aadhaar_no)', 'Aadhaar Number must be Unique'),
         ('check_student_enrollment_no', 'unique(enrollment_no)', 'Enrollment Number must be Unique')
     ]
 
-    @api.depends('mathematics', 'science', 'social_science', 'english', 'hindi')
-    def _compute_total_marks(self):
-        for record in self:
-            record.total_marks = record.mathematics + record.science + record.social_science + record.english +record.hindi
-
-    @api.depends('total_marks')
-    def _compute_percentage(self):
-        for record in self:
-            record.percentage = record.total_marks / 5.0
-
-    @api.depends('mathematics', 'science', 'social_science', 'english', 'hindi')
-    def _compute_result(self):
-        for record in self:
-            if (record.mathematics > 35 and record.science > 35 and
-               record.social_science > 35 and record.english > 35 and record.hindi > 35):
-                record.result = 'Pass'
-            else:
-                record.result = 'Fail'
+    # @api.depends('mathematics', 'science', 'social_science', 'english', 'hindi')
+    # def _compute_total_marks(self):
+    #     for record in self:
+    #         record.total_marks = record.mathematics + record.science + record.social_science + record.english +record.hindi
+    #
+    # @api.depends('total_marks')
+    # def _compute_percentage(self):
+    #     for record in self:
+    #         record.percentage = record.total_marks / 5.0
+    #
+    # @api.depends('mathematics', 'science', 'social_science', 'english', 'hindi')
+    # def _compute_result(self):
+    #     for record in self:
+    #         if (record.mathematics > 35 and record.science > 35 and
+    #            record.social_science > 35 and record.english > 35 and record.hindi > 35):
+    #             record.result = 'Pass'
+    #         else:
+    #             record.result = 'Fail'
 
     @api.depends('teacher_ids')
     def _compute_teacher_count(self):
@@ -63,8 +55,23 @@ class UniversityStudent(models.Model):
 
     def button_university_teacher_count(self):
         action = self.env['ir.actions.act_window']._for_xml_id('university_management.university_teacher_count_action')
-        # action['context'] = {'active_test': False}
         action['domain'] = [('id', 'in', self.teacher_ids.ids)]
+        return action
+
+    # def button_student_result_wizard(self):
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'target': 'new',
+    #         'name': _('Result'),
+    #         'view_mode': 'form',
+    #         'res_model': 'university.student.result.wizard',
+    #         'view_id': self.env.ref('university_management.university_student_result_wizard_form_view').id,
+    #     }
+
+    def student_result(self):
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "university_management.university_student_result_action")
+        action['domain'] = [('student_id','=', self.id)]
         return action
 
     def name_get(self):

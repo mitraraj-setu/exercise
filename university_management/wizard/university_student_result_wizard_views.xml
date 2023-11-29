@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="university_student_result_wizard_form_view" model="ir.ui.view">
+            <field name="name">university.student.result.wizard.form</field>
+            <field name="model">university.student.result.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Student Result Wizard">
+                    <group>
+                        <field name="semester" required="1"/>
+                        <field name="mathematics" />
+                         <field name="science"/>
+                         <field name="social_science"/>
+                         <field name="english"/>
+                         <field name="hindi"/>
+                    </group>
+                    <footer>
+                        <button name="submit_result" type="object"
+                            id="button_submit_result"
+                            string="Submit"
+                            context="{'student_id': active_id}"
+                            class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="university_student_result_wizard_action" model="ir.actions.act_window">
+            <field name="name">Result</field>
+            <field name="res_model">university.student.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

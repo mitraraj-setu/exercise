@@ -10,7 +10,6 @@
                     <field name="firstname"/>
                     <field name="lastname"/>
                     <field name="guardian_name"/>
-                    <field name="standard"/>
                     <field name="phone"/>
                     <field name="guardian_contact" optional="hide"/>
                     <field name="email"/>
@@ -26,12 +25,15 @@
             <field name="res_model">university.teacher</field>
             <field name="view_mode">tree,form</field>
         </record>
-
         <record id="university_student_form_view" model="ir.ui.view">
             <field name="name">university.student.form</field>
             <field name="model">university.student</field>
             <field name="arch" type="xml">
                 <form string="Student">
+                    <header>
+                        <button name="%(university_student_result_wizard_action)d" string="Result" type="action" class="btn-primary"/>
+<!--                        <button name="button_student_result_wizard" string="Result" type="object" context="{'student_id': active_id}" class="btn-primary"/>-->
+                    </header>
                     <sheet>
                         <h1>
                             <field name="enrollment_no"/>
@@ -41,6 +43,7 @@
                                     attrs="{'invisible': [('teacher_count', '=', 0)]}" icon="fa-file-text-o">
                                 <field string="Teachers" name="teacher_count" widget="statinfo"/>
                             </button>
+                            <button class="oe_stat_button" type="object" string="View Result" name="student_result"/>
                         </div>
                         <separator/>
                         <group>
@@ -53,7 +56,6 @@
                             </group>
                             <group>
                                 <field name="lastname"/>
-                                <field name="standard"/>
                                 <field name="guardian_contact"/>
                                 <field name="student_aadhaar_no"/>
                             </group>
@@ -62,22 +64,6 @@
                                 <field name="date_of_birth"/>
                                 <field name="email"/>
                             </group>
-                            <notebook>
-                                <page string="Report">
-                                    <group>
-                                        <field name="mathematics" string="Mathematics"/>
-                                        <field name="science" string="Science"/>
-                                        <field name="social_science" string="Social Science"/>
-                                        <field name="english" string="English"/>
-                                        <field name="hindi" string="Hindi"/>
-                                    </group>
-                                    <group>
-                                        <field name="total_marks" string="Total Marks"/>
-                                        <field name="percentage" string="Percentage"/>
-                                        <field name="result" string="Result"/>
-                                    </group>
-                                </page>
-                            </notebook>
                         </group>
                     </sheet>
                     <div class="oe_chatter">

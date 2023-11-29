@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="university_student_result_tree_view" model="ir.ui.view">
+            <field name="name">university.student.result.tree</field>
+            <field name="model">university.student.result</field>
+            <field name="arch" type="xml">
+                <tree expand="True">
+                    <field name="semester" string="Semester"/>
+                    <field name="mathematics" string="Mathematics"/>
+                    <field name="science" string="Science"/>
+                    <field name="social_science" string="Social Science"/>
+                    <field name="english" string="English"/>
+                    <field name="hindi" string="Hindi"/>
+                    <field name="total_marks" string="Total Marks"/>
+                    <field name="percentage" string="Percentage"/>
+                    <field name="result" string="Result"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="university_student_result_form_view" model="ir.ui.view">
+            <field name="name">university.student.result.form</field>
+            <field name="model">university.student.result</field>
+            <field name="arch" type="xml">
+                <form string="Student Result">
+                    <sheet>
+                        <field name="semester" string="Semester"/>
+                        <field name="mathematics" string="Mathematics" help="Marks out of 100"/>
+                        <field name="science" string="Science"/>
+                        <field name="social_science" string="Social Science"/>
+                        <field name="english" string="English"/>
+                        <field name="hindi" string="Hindi"/>
+                        <field name="total_marks" string="Total Marks"/>
+                        <field name="percentage" string="Percentage"/>
+                        <field name="result" string="Result"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="university_student_result_action" model="ir.actions.act_window">
+            <field name="name">Result</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">university.student.result</field>
+            <field name="view_mode">tree</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="university_student_result_form_view" model="ir.ui.view">
+            <field name="name">university.student.result.form</field>
+            <field name="model">university.student.result</field>
+            <field name="arch" type="xml">
+                <form string="Semester">
+                    <sheet>
+                        <field name="semester" string="Select Semester"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
