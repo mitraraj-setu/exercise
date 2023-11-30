@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_product_template_form_inherited" model="ir.ui.view">
+            <field name="name">product.template.form.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page/group/group/field[@name='detailed_type']" position="after">
+                    <field name="minimum_price_enable" invisible="1"/>
+                    <field name="minimum_price" string="Minimum unit price" attrs="{'invisible': [('minimum_price_enable', '=', False)],
+                           'required': [('maximum_price', '=', True)]}"/>
+                    <field name="maximum_price" string="Maximum unit price" attrs="{'required': [('minimum_price', '=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

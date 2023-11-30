@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_inherited_form_view" model="ir.ui.view">
+        <field name="name">product.product.inherited.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_po_id']" position="after">
+                <field name="tracking" invisible="1"/>
+                <field name="lot_name_type" string="Lot Name Type" attrs="{'invisible': [('tracking', '!=', 'lot')]}"/>
+                <field name="lot_name" string="Lot Name" attrs="{'invisible': ['|',('lot_name_type', '=', False), ('tracking', '!=', 'lot')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

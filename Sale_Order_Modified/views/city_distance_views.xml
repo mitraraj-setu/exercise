@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="city_distance_tree_view" model="ir.ui.view">
+            <field name="name">city.distance.tree</field>
+            <field name="model">city.distance</field>
+            <field name="arch" type="xml">
+                <tree expand="True" editable="top">
+                    <field name="from_loc"/>
+                    <field name="to_loc" />
+                    <field name="distance"/>
+                    <field name="carrier_id"/>
+                    <field name="delivery_charges"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="city_distance_action" model="ir.actions.act_window">
+            <field name="name">City Distances</field>
+            <field name="res_model">city.distance</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem id="city_distance_menu" name="City Distances" action="city_distance_action"/>
+
+</odoo>

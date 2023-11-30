@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_product_user,access_product_product_user,model_product_product,base.group_user,1,1,1,1
+access_sale_order_line_user,access_sale_order_line_user,model_sale_order_line,base.group_user,1,1,1,1
+access_sale_order_user,access_sale_order_user,model_sale_order,base.group_user,1,1,1,1
+access_product_template_user,access_product_template_user,model_product_template,base.group_user,1,1,1,1
+access_product_product_user,access_product_product_user,model_product_product,base.group_user,1,1,1,1
+access_product_pricelist_user,access_product_pricelist_user,model_product_pricelist,base.group_user,1,1,1,1
+access_product_pricelist_item_user,access_product_pricelist_item_user,model_product_pricelist_item,base.group_user,1,1,1,1
+access_stock_move_user,access_stock_move_user,model_stock_move,base.group_user,1,1,1,1
+access_stock_picking_user,access_stock_picking_user,model_stock_picking,base.group_user,1,1,1,1
+access_city_distance_user,access_city_distance_user,model_city_distance,base.group_user,1,1,1,1
+access_sale_commission_user,access_sale_commission_user,model_sale_commission,base.group_user,1,1,1,1
+

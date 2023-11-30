@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="product_pricelist_form_view_inherited" model="ir.ui.view">
+        <field name="name">product.pricelist.form.inherited</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/group/field[@name='company_id']" position="after">
+                <field name="order_amt_based"/>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='pricelist_rules']" position="after">
+                <page string="Order Amount Rules" attrs="{'invisible': [('order_amt_based', '=', False)]}">
+                    <field name="order_amt_item_ids">
+                        <tree editable="bottom">
+                            <field name="product_tmpl_id" string="Products" required="1"/>
+                            <field name="product_id" string="Variants"
+                            domain="[('product_tmpl_id', '=', product_tmpl_id)]"
+                            options="{'no_create':1}"/>
+                            <field name="minimum_amount"/>
+                            <field name="maximum_amount"/>
+                            <field name="discount"/>
+                            <field name="company_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_commission_tree_view" model="ir.ui.view">
+        <field name="name">sale.commission.tree</field>
+        <field name="model">sale.commission</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="sequence" widget="handle"/>
+                <field name="user_id"/>
+                <field name="product_temp_id"/>
+                <field name="rule"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="minimum"/>
+                <field name="maximum"/>
+                <field name="commission_type"/>
+                <field name="fixed_amount" attrs="{'invisible':[('commission_type', '=', 'percentage')], 'required':[('commission_type', '=', 'fixed')]}"/>
+                <field name="percentage" attrs="{'invisible':[('commission_type', '=', 'fixed')], 'required':[('commission_type', '=', 'percentage')]}"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    <record id="sale_commission_form_view" model="ir.ui.view">-->
+<!--        <field name="name">sale.commission.offer.form</field>-->
+<!--        <field name="model">sale.commission</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Rule">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="user_id"/>-->
+<!--                            <field name="rule"/>-->
+<!--                            <field name="start_date"/>-->
+<!--                            <field name="end_date"/>-->
+<!--                            <field name="commission_type"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="minimum_amount" attrs="{'invisible':[('rule', 'in', ['product'])], 'required':[('rule', 'in', ['product'])]}"/>-->
+<!--                            <field name="maximum_amount" attrs="{'invisible':[('rule', 'in', ['product'])], 'required':[('rule', 'in', ['product'])]}"/>-->
+<!--                            <field name="minimum_qty" attrs="{'invisible':[('rule', 'in', ['order'])], 'required':[('rule', 'in', ['product'])]}"/>-->
+<!--                            <field name="maximum_qty" attrs="{'invisible':[('rule', 'in', ['order'])], 'required':[('rule', 'in', ['product'])]}"/>-->
+<!--                            <field name="fixed_amount" attrs="{'invisible':[('commission_type', '=', 'percentage')]}"/>-->
+<!--                            <field name="percentage" attrs="{'invisible':[('commission_type', '=', 'fixed')]}"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="sale_commission_action" model="ir.actions.act_window">
+        <field name="name">Sale Commission Rules</field>
+        <field name="res_model">sale.commission</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sale_commission_root_menu" name="Sale Commission" action="sale_commission_action"/>
+
+</odoo>
