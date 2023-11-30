@@ -10,4 +10,4 @@ access_stock_move_user,access_stock_move_user,model_stock_move,base.group_user,1
 access_stock_picking_user,access_stock_picking_user,model_stock_picking,base.group_user,1,1,1,1
 access_city_distance_user,access_city_distance_user,model_city_distance,base.group_user,1,1,1,1
 access_sale_commission_user,access_sale_commission_user,model_sale_commission,base.group_user,1,1,1,1
-
+access_res_partner_user,access_res_partner_user,model_res_partner,base.group_user,1,1,1,1

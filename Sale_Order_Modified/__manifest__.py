@@ -16,7 +16,8 @@
         'views/product_pricelist_views.xml',
         'views/product_product_views.xml',
         'views/city_distance_views.xml',
-        'views/sale_commission_views.xml'
+        'views/sale_commission_views.xml',
+        'views/res_partner_views.xml'
         # 'views/stock_move_views.xml',
         # 'views/stock_picking_views.xml'
 

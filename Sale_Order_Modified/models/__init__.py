@@ -13,3 +13,4 @@ from . import mrp_production
 from . import city_distance
 from . import delivery_carrier
 from . import sale_commission
+from . import res_partner

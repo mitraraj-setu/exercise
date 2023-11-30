@@ -8,6 +8,9 @@ class SaleOrder(models.Model):
     order_commission = fields.Float(string='Order Commission')
     total_commission = fields.Float(string='Total Commission')
 
+    buyer_partner = fields.Many2one('res.partner', string='Buyer')
+    seller_partner = fields.Many2one('res.partner', string='Seller')
+
     def action_confirm(self):
         self.set_commission()
         # for sol in self.order_line:

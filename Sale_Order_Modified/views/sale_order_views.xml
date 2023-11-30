@@ -16,10 +16,25 @@
                 <field name="order_commission"/>
                 <field name="total_commission"/>
             </xpath>
+            <xpath expr="//sheet/group/group/field[@name='partner_id']" position="after">
+                <field name="buyer_partner" domain="[('buyer', '=', True)]"/>
+                <field name="seller_partner" domain="[('seller', '=', True)]"/>
+            </xpath>
 <!--            <xpath expr="//notebook/page/field[@name='order_line']" position="attributes">-->
 <!--                  <attribute name="attrs">{'readonly': [('state', '=', 'sale')]}</attribute>-->
 <!--            </xpath>-->
         </field>
     </record>
+
+<!--    <record id="sale_order_filter_inherited_view" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.filter.inherited</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_sales_order_filter"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//filter[@name='my_sale_orders_filter']" position="before">-->
+<!--                <filter string="Zero Commission" domain="[('total_commission', '=', 0)]"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
 
 </odoo>
