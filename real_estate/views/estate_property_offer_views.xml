@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="estate_property_offer_tree_view" model="ir.ui.view">
+        <field name="name">estate.property.offer.tree</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="property_id" string="Property Name" readonly="1"/>
+                <field name="property_type_id" string="Property Type" readonly="1"/>
+                <field name="partner_id" string="Partner"/>
+                <field name="price" string="Offered Price"/>
+                <field name="offer_status" string="Status" readonly="1"/>
+                <button name="button_accept_offer" type="object"
+                        icon="fa-check" attrs="{'invisible':['|',('offer_status','=','accepted'),('offer_status','=','refused')]}"/>
+                <button name="button_reject_offer" type="object"
+                        icon="fa-times" attrs="{'invisible':['|',('offer_status','=','accepted'),('offer_status','=','refused')]}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_offer_form_view" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form string="Offer">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="property_id"/>
+<!--                            <field name="property_type_id" string="Property Type"/>-->
+                            <field name="partner_id" context="{'property_id': property_id}"/>
+                        </group>
+                        <group>
+                            <field name="price"/>
+                            <button name="button_accept_offer" type="object"
+                                    icon="fa-check"/>
+                            <button name="button_reject_offer" type="object"
+                                    icon="fa-times"/>
+                            <field name="offer_status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="estate_property_offer_count_action" model="ir.actions.act_window">
+        <field name="name">Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="estate_property_offer_menu" name="Property Offers" action="estate_property_offer_action"/>
+
+</odoo>

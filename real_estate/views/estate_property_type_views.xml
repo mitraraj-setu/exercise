@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<odoo>
+
+        <record id="estate_property_type_tree_view" model="ir.ui.view">
+            <field name="name">estate.property.type.tree</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <tree expand="True">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+<!--                    <field name="property_type_id" string="Property Name" options="{'no_create': True}"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="count_and_show_offers" model="ir.actions.act_window">
+            <field name="name">Total Offers</field>
+            <field name="res_model">estate.property.offer</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="count_and_show_properties" model="ir.actions.act_window">
+            <field name="name">Total Properties</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="estate_property_type_form_view" model="ir.ui.view">
+            <field name="name">estate.property.type.form</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <form string="Property Type">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" type="object" string="Offers" name="button_show_offers" icon="fa-file-text-o">
+                                <field string="Offers" name="offer_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="button_show_properties" icon="fa-file-text-o">
+                                <field string="Properties" name="properties_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="estate_property_type_search_view" model="ir.ui.view">
+            <field name="name">estate.property.type.search</field>
+            <field name="model">estate.property.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Name" name="group_by_name" context="{'group_by': 'name'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="estate_property_type_action" model="ir.actions.act_window">
+            <field name="name">Property Types</field>
+            <field name="res_model">estate.property.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="estate_property_type_menu" name="Property Types" parent="estate_property_settings_menu" action="estate_property_type_action"/>
+
+</odoo>

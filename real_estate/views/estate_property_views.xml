@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<odoo>
+
+        <record id="estate_property_tree_view" model="ir.ui.view">
+            <field name="name">estate.property.tree</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <tree expand="True">
+                    <field name="name"/>
+                    <field name="description" optional="hide"/>
+                    <field name="postcode"/>
+                    <field name="date_availability" optional="hide"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="facades" optional="hide"/>
+                    <field name="garage"/>
+                    <field name="offer_ids"/>
+                    <field name="salesman_id" optional="hide"/>
+                    <field name="buyer_id" optional="hide"/>
+                    <field name="tag_ids" string="Tags" widget="many2many_tags"/>
+                    <field name="garden"/>
+                    <field name="garden_area" optional="hide"/>
+                    <field name="garden_orientation" optional="hide"/>
+                    <button name="button_garden" type="object" string="Garden"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="estate_property_form_view" model="ir.ui.view">
+            <field name="name">estate.property.form</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <form string="Property">
+                    <header>
+                        <button name="button_garden" type="object"
+                                string="Garden" class="btn-primary"/>
+                        <button name="button_sold_property" type="object"
+                                string="Sold" class="btn-primary" attrs="{'invisible':['|','|','|',('status', '=', 'Sold'),('status','=','Cancelled'),
+                                ('state','=','sold'),('state','=','cancelled')]}"/>
+                        <button name="button_cancel_property" type="object"
+                                string="Cancel" class="btn-primary" attrs="{'invisible':['|','|','|',('status', '=', 'Sold'),('status','=','Cancelled'),
+                                ('state','=','sold'),('state','=','cancelled')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new offer received,offer accepted,sold,cancelled"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" string="Invoice" name="button_open_invoice"
+                                    icon="fa-file-text-o"/>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <separator/>
+                        <group>
+                            <group>
+<!--                                <field name="name"/>-->
+                                <field name="status" attrs="{'readonly':[('status','in',['Sold','Cancelled'])]}"/>
+<!--                                <field name="state"/>-->
+                                <field name="tag_ids" string="Tags" widget="many2many_tags"/>
+                                <field name="type_id"/>
+                                <field name="description"/>
+                                <field name="postcode"/>
+                            </group>
+                            <group>
+                                <field name="date_availability"/>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
+                                <field name="best_price"/>
+                            </group>
+                            <notebook>
+                                <page string="Description">
+                                    <group>
+                                        <field name="bedrooms"/>
+                                        <field name="living_areas"/>
+                                        <field name="living_area"/>
+                                        <field name="facades"/>
+                                        <field name="garage"/>
+                                        <field name="garden"/>
+                                        <field name="garden_areas" attrs="{'invisible':[('garden', '=', False)]}"/>
+                                        <field name="garden_area" attrs="{'invisible':[('garden', '=', False)]}"/>
+                                        <field name="garden_orientation" attrs="{'invisible':[('garden', '=', False)]}"/>
+                                        <field name="total_area" string="Total Area"/>
+                                    </group>
+                                </page>
+                                <page string="Offers">
+                                    <field name="offer_ids" attrs="{'readonly': [('state', '=', 'sold')]}">
+                                        <tree editable="bottom">
+                                            <field name="partner_id"/>
+                                            <field name="price" string="Offered Price"/>
+                                            <field name="offer_status" string="Status" readonly="1"/>
+                                            <button name="button_accept_offer" type="object"
+                                                    icon="fa-check" attrs="{'invisible':['|',('offer_status','=','accepted'),('offer_status','=','refused')]}"/>
+                                            <button name="button_reject_offer" type="object"
+                                                    icon="fa-times" attrs="{'invisible':['|',('offer_status','=','accepted'),('offer_status','=','refused')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Other Info">
+                                    <group>
+                                        <field name="salesman_id"/>
+                                        <field name="buyer_id"/>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="estate_property_search_view" model="ir.ui.view">
+            <field name="name">estate.property.search</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="Available" name="available" domain="[('name', '=', 'Golden Arc')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="estate_property_kanban_view" model="ir.ui.view">
+            <field name="name">estate.property.kanban</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="type_id" records_draggable="False" quick_create_view="estate_property_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <h4>
+                                    <field name="name"/>
+                                </h4>
+                                <div>
+                                    Bedrooms:<field name="bedrooms"/>
+<!--                                    <span class="badge rounded-pill">-->
+<!--                                        <strong>Bedrooms:</strong> <field name="bedrooms"/>-->
+<!--                                    </span>-->
+                                </div>
+<!--                                    <field name="expected_price"/>-->
+<!--                                    <field name="selling_price"/>-->
+                                <field name="tag_ids"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="estate_property_action" model="ir.actions.act_window">
+            <field name="name">Properties</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <record id="estate_property_ad_action" model="ir.actions.act_window">
+            <field name="name">Advertisements</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="hr_employee_print_badge" model="ir.actions.report">
+            <field name="name">Invoices</field>
+            <field name="model">estate.property</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">print_property_sale_invoice</field>
+        </record>
+
+        <template id="print_property_sale_invoice" inherit_id="account.report_invoice_document">
+            <xpath expr="//th[@name='th_priceunit']" position="after">
+                <th name="th_price_unit">
+                    <span>Disc.%</span>
+                </th>
+            </xpath>
+<!--            <xpath expr="//tbody/t/tr/td[@name='project_portal_milestones']" position="after">-->
+<!--                <td class="text-end">-->
+<!--                    <t t-if="is_uom_day">-->
+<!--                        <t t-out="timesheet_ids._convert_hours_to_days(task.effective_hours)"/>-->
+<!--                        <span t-if="task.planned_hours > 0"> / <t t-out="timesheet_ids._convert_hours_to_days(task.planned_hours)"/></span>-->
+<!--                    </t>-->
+<!--                </td>-->
+<!--            </xpath>-->
+        </template>
+
+        <menuitem id="estate_property_root_menu" name="Real Estate" action="estate_property_action"/>
+
+        <menuitem id="estate_property_ad_menu" name="Advertisements" parent="estate_property_root_menu" action="estate_property_ad_action"/>
+        <menuitem id="estate_property_settings_menu" name="Settings" parent="estate_property_root_menu"/>
+
+</odoo>
