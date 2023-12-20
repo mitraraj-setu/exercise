@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="calculation_result_wizard_form_view" model="ir.ui.view">
+            <field name="name">calculation.result.wizard.form</field>
+            <field name="model">calculation.result.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Result">
+                    <group>
+                        <field name="first_value" required="1" help="Enter a numerical value"/>
+                        <field name="second_value" required="1" help="Enter a numerical value"/>
+                    </group>
+                    <footer>
+                        <button name="submit_result" type="object"
+                            id="button_submit_result"
+                            string="Submit"
+                            class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="result_display_wizard_form_view" model="ir.ui.view">
+            <field name="name">result.display.wizard.form</field>
+            <field name="model">calculation.result.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Result">
+                    <group>
+                        <field name="first_value" readonly="1"/>
+                        <field name="second_value" readonly="1"/>
+                        <field name="result" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="addition_result_wizard_action" model="ir.actions.act_window">
+            <field name="name">Result</field>
+            <field name="res_model">calculation.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'operator':'do_add'}</field>
+            <field name="target">new</field>
+        </record>
+        <record id="difference_result_wizard_action" model="ir.actions.act_window">
+            <field name="name">Result</field>
+            <field name="res_model">calculation.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'operator':'do_diff'}</field>
+            <field name="target">new</field>
+        </record>
+        <record id="multiplication_result_wizard_action" model="ir.actions.act_window">
+            <field name="name">Result</field>
+            <field name="res_model">calculation.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'operator':'do_multi'}</field>
+            <field name="target">new</field>
+        </record>
+        <record id="division_result_wizard_action" model="ir.actions.act_window">
+            <field name="name">Result</field>
+            <field name="res_model">calculation.result.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'operator':'do_div'}</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="addition_menu" name="Sum" parent="operator_menu" action="addition_result_wizard_action" sequence="20"/>
+        <menuitem id="difference_menu" name="Difference" parent="operator_menu" action="difference_result_wizard_action" sequence="40"/>
+        <menuitem id="multiplication_menu" name="Multiplication" parent="operator_menu" action="multiplication_result_wizard_action" sequence="50"/>
+        <menuitem id="division_menu" name="Division" parent="operator_menu" action="division_result_wizard_action" sequence="60"/>
+
+</odoo>

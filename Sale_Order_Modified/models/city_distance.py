@@ -10,17 +10,21 @@ class CityDistance(models.Model):
     carrier_id = fields.Many2one('delivery.carrier', string='Service')
     delivery_charges = fields.Float(string='Charge')
 
+    # @api.constrains('from_loc', 'to_loc', 'distance', 'carrier_id')
+    # def _check_duplicate(self):
+    #     dup_distance = self.env['sale.commission'].search(
+    #         ['|', '|', ('carrier_id', '=', self.carrier_id), ('distance', '!=', self.distance), '|',
+    #          '&', ('from_loc', '=ilike', self.to_loc), ('to_loc', '=ilike', self.from_loc),
+    #          '&', ('from_loc', '=ilike', self.from_loc), ('to_loc', '=ilike', self.to_loc)])
+    #     if dup_distance:
+    #         raise ValidationError(_("Duplicate record"))
+
     @api.model
     def create(self, vals_list):
-        # dup_distance = (self.search([('from_loc', '=', vals_list.get('to_loc')), ('to_loc', '=', vals_list.get('from_loc'))]) or
-        #                 self.search([('from_loc', '=', vals_list.get('from_loc')), ('to_loc', '=', vals_list.get('to_loc'))]))
         dup_distance = (self.search(['|', '|', ('carrier_id', '=', vals_list.get('carrier_id')), ('distance', '!=', vals_list.get('distance')),
                                      '&', ('from_loc', '=ilike', vals_list.get('to_loc')), ('to_loc', '=ilike', vals_list.get('from_loc'))]) or
                         self.search(['|', '|', ('carrier_id', '=', vals_list.get('carrier_id')), ('distance', '!=', vals_list.get('distance')),
                                      '&', ('from_loc', '=ilike', vals_list.get('from_loc')), ('to_loc', '=ilike', vals_list.get('to_loc'))]))
-                        # and
-                        # (self.search([('from_loc', '=ilike', vals_list.get('from_loc')), ('to_loc', '=ilike', vals_list.get('to_loc')),
-                        #               ('distance', '=', vals_list.get('distance'))])))
         if dup_distance:
             raise ValidationError(_("Duplicate record"))
         return super().create(vals_list)

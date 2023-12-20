@@ -62,38 +62,38 @@ class SaleOrder(models.Model):
     @api.model
     def create(self, vals_list):
         temp = super().create(vals_list)
-        if vals_list.get('carrier_id'):
-            carrier = self.env['delivery.carrier'].browse(vals_list.get('carrier_id'))
-            vals = {'product_template_id': carrier.product_id.id,
-                    'product_id': carrier.product_id.id,
-                    'name': carrier.product_id.name,
-                    'product_uom_qty': 1.0,
-                    'price_unit': carrier.product_id.list_price,
-                    'order_id': temp.id,
-                    'customer_lead': carrier.product_id.sale_delay}
-            self.env['sale.order.line'].create(vals)
+        # if vals_list.get('carrier_id'):
+        #     carrier = self.env['delivery.carrier'].browse(vals_list.get('carrier_id'))
+        #     vals = {'product_template_id': carrier.product_id.id,
+        #             'product_id': carrier.product_id.id,
+        #             'name': carrier.product_id.name,
+        #             'product_uom_qty': 1.0,
+        #             'price_unit': carrier.product_id.list_price,
+        #             'order_id': temp.id,
+        #             'customer_lead': carrier.product_id.sale_delay}
+        #     self.env['sale.order.line'].create(vals)
         return temp
-
+    #
     def write(self, vals):
-        carrier = self.carrier_id
+    #     carrier = self.carrier_id
         temp = super().write(vals)
-        if ('carrier_id' in vals.keys()) and vals.get('carrier_id'):
-            service_order_lines = self.order_line.filtered(lambda ol: ol.product_template_id.id == carrier.product_id.product_tmpl_id.id)
-            carrier = self.carrier_id
-            if service_order_lines:
-                self.write({'order_line': [(1, service_order_lines.id, {'product_template_id': carrier.product_id.product_tmpl_id.id,
-                                                'product_id': carrier.product_id.id,
-                                                'order_id': self.id,
-                                                'customer_lead': carrier.product_id.sale_delay})]})
-            else:
-                val = {'product_template_id': carrier.product_id.product_tmpl_id.id,
-                       'product_id': carrier.product_id.id,
-                       'order_id': self.id,
-                       'customer_lead': carrier.product_id.sale_delay}
-                self.env['sale.order.line'].create(val)
-        elif ('carrier_id' in vals.keys()) and (not vals.get('carrier_id')):
-            service_order_lines = self.order_line.filtered(lambda ol: ol.product_template_id.id == carrier.product_id.product_tmpl_id.id)
-            service_order_lines.unlink()
+    #     if ('carrier_id' in vals.keys()) and vals.get('carrier_id'):
+    #         service_order_lines = self.order_line.filtered(lambda ol: ol.product_template_id.id == carrier.product_id.product_tmpl_id.id)
+    #         carrier = self.carrier_id
+    #         if service_order_lines:
+    #             self.write({'order_line': [(1, service_order_lines.id, {'product_template_id': carrier.product_id.product_tmpl_id.id,
+    #                                             'product_id': carrier.product_id.id,
+    #                                             'order_id': self.id,
+    #                                             'customer_lead': carrier.product_id.sale_delay})]})
+    #         else:
+    #             val = {'product_template_id': carrier.product_id.product_tmpl_id.id,
+    #                    'product_id': carrier.product_id.id,
+    #                    'order_id': self.id,
+    #                    'customer_lead': carrier.product_id.sale_delay}
+    #             self.env['sale.order.line'].create(val)
+    #     elif ('carrier_id' in vals.keys()) and (not vals.get('carrier_id')):
+    #         service_order_lines = self.order_line.filtered(lambda ol: ol.product_template_id.id == carrier.product_id.product_tmpl_id.id)
+    #         service_order_lines.unlink()
         return temp
 
     def _cron_auto_invoice(self):
@@ -110,39 +110,39 @@ class SaleOrder(models.Model):
                 continue
             so.invoice_ids[-1].write({'invoice_date': so.picking_ids[-1].scheduled_date})
 
-    @api.onchange('partner_id')
-    def _onchange_partner_id(self):
-        for record in self:
-            warehouse = self.env['stock.warehouse'].search([('company_id', '=', self.env.company.id)])
-            warehouse_city = warehouse.partner_id.mapped('city')
-            city_dist = self.env['city.distance'].search(['|', ('from_loc', '=', record.partner_id.city),('to_loc', '=', record.partner_id.city)])
-            city_distance = 5000
-            wh_city = ''
-            del_charge = 100000
-            service = ''
-            # if record.partner_id.city in warehouse_city:
-            #     record.warehouse_id = warehouse.filtered(lambda w: w.partner_id.city == record.partner_id.city)
-            #     for val in city_dist:
-            #         if del_charge > val['delivery_charges']:
-            #             del_charge = val['delivery_charges']
-            #             service = val['carrier_id']
-            #     record.carrier_id = service
-            # else:
-            for val in city_dist:
-                if city_distance >= val['distance']:
-                    if city_distance == val['distance']:
-                        if del_charge > val['delivery_charges']:
-                            del_charge = val['delivery_charges']
-                    city_distance = val['distance']
-                    if val['from_loc'] in warehouse_city or val['to_loc'] in warehouse_city:
-                        if val['from_loc'] in warehouse_city:
-                            wh_city = val['from_loc']
-                        else:
-                            wh_city = val['to_loc']
-                    service = val['carrier_id']
-
-            record.warehouse_id = warehouse.filtered(lambda w: w.partner_id.city == wh_city)
-            record.carrier_id = service
+    # @api.onchange('partner_id')
+    # def _onchange_partner_id(self):
+    #     for record in self:
+    #         warehouse = self.env['stock.warehouse'].search([('company_id', '=', self.env.company.id)])
+    #         warehouse_city = warehouse.partner_id.mapped('city')
+    #         city_dist = self.env['city.distance'].search(['|', ('from_loc', '=', record.partner_id.city),('to_loc', '=', record.partner_id.city)])
+    #         city_distance = 5000
+    #         wh_city = ''
+    #         del_charge = 100000
+    #         service = ''
+    #         # if record.partner_id.city in warehouse_city:
+    #         #     record.warehouse_id = warehouse.filtered(lambda w: w.partner_id.city == record.partner_id.city)
+    #         #     for val in city_dist:
+    #         #         if del_charge > val['delivery_charges']:
+    #         #             del_charge = val['delivery_charges']
+    #         #             service = val['carrier_id']
+    #         #     record.carrier_id = service
+    #         # else:
+    #         for val in city_dist:
+    #             if city_distance >= val['distance']:
+    #                 if city_distance == val['distance']:
+    #                     if del_charge > val['delivery_charges']:
+    #                         del_charge = val['delivery_charges']
+    #                 city_distance = val['distance']
+    #                 if val['from_loc'] in warehouse_city or val['to_loc'] in warehouse_city:
+    #                     if val['from_loc'] in warehouse_city:
+    #                         wh_city = val['from_loc']
+    #                     else:
+    #                         wh_city = val['to_loc']
+    #                 service = val['carrier_id']
+    #
+    #         record.warehouse_id = warehouse.filtered(lambda w: w.partner_id.city == wh_city)
+    #         record.carrier_id = service
             # record.carrier_id.write({'display_name': service.display_name})
                 # for val in record.picking_ids:
                 #     val.carrier_id = service

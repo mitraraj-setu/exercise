@@ -79,7 +79,7 @@ class EstateProperty(models.Model):
         temp = super().create(vals_list)
         # temp = self.create({{'name':'abc', 'postcode':'5684'},
         #                    {'name':'abcd', 'postcode':'5685'}})
-        self.state = 'new'
+        temp.state = 'new'
         return temp
 
     def write(self, vals):

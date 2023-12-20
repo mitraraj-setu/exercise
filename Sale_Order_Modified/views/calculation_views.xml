@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="calculation_tree_view" model="ir.ui.view">
+            <field name="name">calculation.tree</field>
+            <field name="model">calculation</field>
+            <field name="arch" type="xml">
+                <tree expand="True">
+                    <field name="first_value" required="1"/>
+                    <field name="second_value" required="1"/>
+                    <field name="operation"/>
+                    <field name="result"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="calculation_action" model="ir.actions.act_window">
+            <field name="name">Calculations</field>
+            <field name="res_model">calculation</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem id="calculation_root_menu" name="Calculator" action="calculation_action"/>
+        <menuitem id="operator_menu" name="Operators" parent="calculation_root_menu"/>
+
+</odoo>

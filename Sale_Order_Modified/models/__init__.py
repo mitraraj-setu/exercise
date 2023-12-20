@@ -14,3 +14,6 @@ from . import city_distance
 from . import delivery_carrier
 from . import sale_commission
 from . import res_partner
+from . import calculation
+from . import purchase_order
+from . import purchase_order_line
