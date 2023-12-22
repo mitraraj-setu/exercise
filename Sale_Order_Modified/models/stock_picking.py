@@ -1,9 +1,33 @@
 from odoo import fields, models, api, _
 from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 from odoo.tools.misc import clean_context, OrderedSet, groupby
+from odoo.exceptions import UserError, ValidationError
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
+
+    @api.depends('move_ids')
+    def _compute_move_ids(self):
+        for record in self:
+            if self.picking_type_code == 'incoming':
+                raise UserError(_("Cannot add a new line that is not in purchase order"))
+
+    # @api.onchange('move_ids')
+    # def _onchange_move_ids(self):
+    #     if self.picking_type_code == 'incoming':
+    #         raise UserError(_("Cannot add a new line that is not in purchase order"))
+
+    @api.constrains('move_ids')
+    def _check_move_line_ids(self):
+        if self.picking_type_code == 'incoming':
+            for move in self.move_ids:
+                if not move.move_line_ids:
+                    # if not any(line.product_id.id == move.product_id.id for line in self.purchase_id.order_line):
+                    raise UserError(_("Cannot add a new line that is not in purchase order"))
+
+
+
+
 
     # @api.model_create_multi
     # def create(self, vals_list):

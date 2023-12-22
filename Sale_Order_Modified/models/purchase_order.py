@@ -1,4 +1,5 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError, ValidationError
 
 
 class PurchaseOrder(models.Model):
@@ -16,3 +17,13 @@ class PurchaseOrder(models.Model):
         #     elif po_line.get('price_unit') == po_lines.price_unit:
         #         self.price_unit_check = 'equal'
         return super().create(vals_list)
+
+    def write(self, values):
+        temp = super().write(values)
+        # if 'order_line' in values.keys():
+        #     if self.picking_ids:
+        #         for value in values.get('order_line'):
+        #             if type(value[1]) != type(0):
+        #                 raise UserError(_("Cannot add a new line for a confirmed purchase order"))
+        #             self.write({'order_line': value})
+        return temp

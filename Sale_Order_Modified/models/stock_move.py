@@ -1,9 +1,32 @@
 from odoo import fields, models, api, _
 from odoo.tools.float_utils import float_compare, float_is_zero, float_round
+from odoo.exceptions import UserError, ValidationError
 
 
 class StockMove(models.Model):
     _inherit = 'stock.move'
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # for vals in vals_list:
+        #     picking = self.env['stock.picking'].browse(vals.get('picking_id'))
+        #     if picking.picking_type_code == 'incoming':
+        #         if not any(line.product_id.id == vals.get('product_id') for line in picking.purchase_id.order_line):
+        #             raise UserError(_("Cannot add a new line that is not present in purchase order"))
+        #         if any(line.product_id.id == vals.get('product_id') for line in picking.move_line_ids):
+        #             raise UserError(_("Product move line already exists"))
+        temp = super().create(vals_list)
+        return temp
+
+
+
+
+
+
+
+
+
+
 
     # def _prepare_move_line_vals(self, quantity=None, reserved_quant=None):
     #     self.ensure_one()
