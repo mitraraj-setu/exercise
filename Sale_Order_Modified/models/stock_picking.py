@@ -6,11 +6,11 @@ from odoo.exceptions import UserError, ValidationError
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    @api.depends('move_ids')
-    def _compute_move_ids(self):
-        for record in self:
-            if self.picking_type_code == 'incoming':
-                raise UserError(_("Cannot add a new line that is not in purchase order"))
+    # @api.depends('move_ids')
+    # def _compute_move_ids(self):
+    #     for record in self:
+    #         if self.picking_type_code == 'incoming':
+    #             raise UserError(_("Cannot add a new line that is not in purchase order"))
 
     # @api.onchange('move_ids')
     # def _onchange_move_ids(self):

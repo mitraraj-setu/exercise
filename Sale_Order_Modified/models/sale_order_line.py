@@ -65,9 +65,9 @@ class SaleOrderLine(models.Model):
         #         return super(SaleOrderLine, self).create(vals_list)
 
         lines = super().create(vals_list)
-        for line in lines:
-            if line.state == 'sale':
-                raise UserError(_("You cannot add a product after confirming quotation."))
+        # for line in lines:
+        #     if line.state == 'sale':
+        #         raise UserError(_("You cannot add a product after confirming quotation."))
                 # temp = super().unlink()
                 # return temp
-            return lines
+        return lines

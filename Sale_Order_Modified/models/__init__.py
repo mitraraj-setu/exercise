@@ -17,3 +17,4 @@ from . import res_partner
 from . import calculation
 from . import purchase_order
 from . import purchase_order_line
+from . import stock_quant
