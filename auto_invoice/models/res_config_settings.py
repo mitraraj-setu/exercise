@@ -25,7 +25,7 @@ class ResConfigSettings(models.TransientModel):
         return res
 
     def set_values(self):
-        super(ResConfigSettings, self).set_values()
         IrDefault = self.env['ir.default'].sudo()
-        IrDefault.set('res.config.settings', 'days', self.days)
         IrDefault.set('res.config.settings', 'no_of_days', self.no_of_days)
+        self.write({'days':0}) if not self.no_of_days else IrDefault.set('res.config.settings', 'days', self.days)
+        super(ResConfigSettings, self).set_values()
