@@ -7,14 +7,17 @@ class SaleOrder(models.Model):
 
     enable_auto_invoice = fields.Boolean(string='Enable Auto Invoice')
 
+    def write(self, vals):
+        return super().write(vals)
+
     def _cron_create_auto_invoice(self):
-        orders = self.env['sale.order'].search([('enable_auto_invoice', '=', True), ('state', '=', 'sale')])
+        orders = self.env['sale.order'].search([('enable_auto_invoice', '=', True), ('state', '=', 'sale'), ('invoice_ids', '=', False)])
         for order in orders:
             temp = self.env['ir.default'].get('res.config.settings', 'days')
             today = datetime.datetime.today()
-            if (order.date_order + datetime.timedelta(days=temp)) > today:
+            if (order.date_order + datetime.timedelta(days=temp)) < today:
                 if all(picking.state == 'done' for picking in order.picking_ids):
-                    ctx = {'active_model': 'sale.order', 'active_id': order.id}
+                    ctx = {'active_model': 'sale.order', "active_ids": [order.id], 'active_id': order.id}
                     create_invoice_wizard = self.env['sale.advance.payment.inv'].with_context(ctx).create(
                         {'advance_payment_method': 'delivered'})
                     try:
