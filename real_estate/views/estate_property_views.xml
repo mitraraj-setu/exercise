@@ -187,7 +187,7 @@
 <!--            </xpath>-->
         </template>
 
-        <menuitem id="estate_property_root_menu" name="Real Estate" action="estate_property_action"/>
+        <menuitem id="estate_property_root_menu" name="Real Estate" action="estate_property_action" web_icon="real_estate,static/description/auto_invoice.png"/>
 
         <menuitem id="estate_property_ad_menu" name="Advertisements" parent="estate_property_root_menu" action="estate_property_ad_action"/>
         <menuitem id="estate_property_settings_menu" name="Settings" parent="estate_property_root_menu"/>
