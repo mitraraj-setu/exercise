@@ -7,7 +7,6 @@ from . import product_pricelist
 from . import product_pricelist_item
 from . import stock_move
 from . import stock_picking
-from . import stock_move_line
 from . import product_product
 from . import mrp_production
 from . import city_distance
@@ -18,3 +17,4 @@ from . import calculation
 from . import purchase_order
 from . import purchase_order_line
 from . import stock_quant
+from . import account_payment

@@ -34,6 +34,8 @@ class StockPicking(models.Model):
     #     res = super().create(vals_list)
     #     for record in self:
     #         record.carrier_id = record.sale_id.carrier_id
+    #         if not record.sale_id and record.origin:
+    #
     #     return res
 
     # def action_assign(self):

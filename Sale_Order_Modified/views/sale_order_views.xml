@@ -1,30 +1,30 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <record id="view_order_form_inherited" model="ir.ui.view">
-        <field name="name">sale.order.form.inherited</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//button[@id='action_confirm']" position="attributes">
-                  <attribute name="attrs">{'invisible': [('state', '!=', 'sent')]}</attribute>
-            </xpath>
-            <xpath expr="//sheet/div[hasclass('oe_title')]" position="after">
-                <field name="carrier_id"/>
-            </xpath>
-            <xpath expr="//notebook/page/group/group[hasclass('oe_subtotal_footer')]" position="after">
-                <field name="order_commission"/>
-                <field name="total_commission"/>
-            </xpath>
-            <xpath expr="//sheet/group/group/field[@name='partner_id']" position="after">
-                <field name="buyer_partner" domain="[('buyer', '=', True)]"/>
-                <field name="seller_partner" domain="[('seller', '=', True)]"/>
-            </xpath>
+<!--    <record id="view_order_form_inherited" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.form.inherited</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@id='action_confirm']" position="attributes">-->
+<!--                  <attribute name="attrs">{'invisible': [('state', '!=', 'sent')]}</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//sheet/div[hasclass('oe_title')]" position="after">-->
+<!--                <field name="carrier_id"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//notebook/page/group/group[hasclass('oe_subtotal_footer')]" position="after">-->
+<!--                <field name="order_commission"/>-->
+<!--                <field name="total_commission"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//sheet/group/group/field[@name='partner_id']" position="after">-->
+<!--                <field name="buyer_partner" domain="[('buyer', '=', True)]"/>-->
+<!--                <field name="seller_partner" domain="[('seller', '=', True)]"/>-->
+<!--            </xpath>-->
 <!--            <xpath expr="//notebook/page/field[@name='order_line']" position="attributes">-->
 <!--                  <attribute name="attrs">{'readonly': [('state', '=', 'sale')]}</attribute>-->
 <!--            </xpath>-->
-        </field>
-    </record>
+<!--        </field>-->
+<!--    </record>-->
 
 <!--    <record id="sale_order_filter_inherited_view" model="ir.ui.view">-->
 <!--        <field name="name">sale.order.filter.inherited</field>-->

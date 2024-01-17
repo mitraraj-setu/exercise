@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <odoo>
 
-    <record id="view_order_form_inherited" model="ir.ui.view">
-        <field name="name">sale.order.form.inherited</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form/header/button[@id='action_confirm']" position="attributes">
-                  <attribute name="attrs">{'invisible': [('state', '!=', 'sent')]}</attribute>
-            </xpath>
-            <xpath expr="//notebook/page/field/tree/field[@name='product_uom_qty']" position="after">
-                  <field name="lot_ids" string="Serial" widget="many2many_tags" domain="[('product_id', '=', product_id),('company_id', '=', company_id)]" optional="hide"/>
-            </xpath>
-            <xpath expr="//notebook/page/field/tree/field[@name='product_uom_qty']" position="after">
-                  <field name="location_id" domain="[('company_id', '=', company_id)]" optional="hide"/>
-            </xpath>
-            <xpath expr="//notebook/page/field/tree/field[@name='discount']" position="after">
-                  <field name="product_commission"/>
-            </xpath>
+<!--    <record id="view_order_form_inherited" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.form.inherited</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form/header/button[@id='action_confirm']" position="attributes">-->
+<!--                  <attribute name="attrs">{'invisible': [('state', '!=', 'sent')]}</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//notebook/page/field/tree/field[@name='product_uom_qty']" position="after">-->
+<!--                  <field name="lot_ids" string="Serial" widget="many2many_tags" domain="[('product_id', '=', product_id),('company_id', '=', company_id)]" optional="hide"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//notebook/page/field/tree/field[@name='product_uom_qty']" position="after">-->
+<!--                  <field name="location_id" domain="[('company_id', '=', company_id)]" optional="hide"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//notebook/page/field/tree/field[@name='discount']" position="after">-->
+<!--                  <field name="product_commission"/>-->
+<!--            </xpath>-->
 <!--            <xpath expr="//notebook/page/field/tree/field[@name='price_subtotal']" position="before">-->
 <!--                  <field name="discounted_subtotal" string="Discounted Price"/>-->
 <!--            </xpath>-->
 <!--            <xpath expr="//notebook/page/field/tree/field[@name='discount']" position="before">-->
 <!--                  <field name="discount_order_amt_based" string="Discount %"/>-->
 <!--            </xpath>-->
-        </field>
-    </record>
+<!--        </field>-->
+<!--    </record>-->
 
 <!--    <record id="view_order_tree_inherited" model="ir.ui.view">-->
 <!--        <field name="name">sale.order.tree.inherited</field>-->
