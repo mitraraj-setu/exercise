@@ -4,14 +4,14 @@ from odoo import fields, models, api
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    @api.model
-    def create(self, vals):
+    # @api.model
+    # def create(self, vals):
         # if vals.get('name', 'New') == 'New':
         #     vals['name'] = self.env['ir.sequence'].next_by_code('purchase.order') + ' ('+ self.env.company.currency_id.name +')'
 
-        lines = super().create(vals)
-        lines['name'] = lines['name'] + ' ('+ self.env.company.currency_id.name +')'
-        return lines
+        # lines = super().create(vals)
+        # lines['name'] = lines['name'] + ' ('+ self.env.company.currency_id.name +')'
+        # return lines
 
     # def write(self, vals):
     #     # vals['name'] = 'New'
