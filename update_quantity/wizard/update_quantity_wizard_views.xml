@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="update_quantity_wizard_form_view" model="ir.ui.view">
+            <field name="name">update.quantity.wizard.form</field>
+            <field name="model">update.quantity.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Update">
+                    <group>
+                        <field name="location_id" required="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="wiz_lines"/>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="update_quantity" type="object"
+                            string="Update"
+                            class="btn-primary" data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="update_quantity_wizard_line_tree_view" model="ir.ui.view">
+            <field name="name">update_quantity.wizard.line.tree</field>
+            <field name="model">update.quantity.wizard.line</field>
+            <field name="arch" type="xml">
+                <tree string="Update Quantity" create="0" editable="top">
+                    <field name="product_id" readonly="1"/>
+                    <field name="quantity" string="Quantity"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="update_quantity_inherited_view_order_form" model="ir.ui.view">
+            <field name="name">update_quantity.sale_order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/field[@name='state']" position="before">
+                    <button name="action_update_quantity" string="Update Quantity" type="object" class="btn-primary" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
