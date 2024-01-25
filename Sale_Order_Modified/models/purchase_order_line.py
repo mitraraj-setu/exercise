@@ -9,17 +9,17 @@ class PurchaseOrderLine(models.Model):
                                                                    ('equal', 'Equal'),
                                                                    ('high', 'High')], invisible=True)
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        for values in vals_list:
-            po_line = self.env['purchase.order.line'].search([('product_id', '=', values.get('product_id'))], order='id desc', limit=1)
-            if values.get('price_unit') < po_line.price_unit:
-                values['price_unit_check'] = 'low'
-            elif values.get('price_unit') > po_line.price_unit:
-                values['price_unit_check'] = 'high'
-            elif values.get('price_unit') == po_line.price_unit:
-                values['price_unit_check'] = 'equal'
-        return super().create(vals_list)
+    # @api.model_create_multi
+    # def create(self, vals_list):
+    #     for values in vals_list:
+    #         po_line = self.env['purchase.order.line'].search([('product_id', '=', values.get('product_id'))], order='id desc', limit=1)
+    #         if values.get('price_unit') < po_line.price_unit:
+    #             values['price_unit_check'] = 'low'
+    #         elif values.get('price_unit') > po_line.price_unit:
+    #             values['price_unit_check'] = 'high'
+    #         elif values.get('price_unit') == po_line.price_unit:
+    #             values['price_unit_check'] = 'equal'
+    #     return super().create(vals_list)
 
     def write(self, values):
         temp = super().write(values)
