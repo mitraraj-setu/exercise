@@ -1,0 +1,69 @@
+<odoo>
+    <record id="setu_discount_product_123" model="product.template" >
+            <field name="name">Discount</field>
+            <field name="default_code">DISC_123</field>
+            <field name="categ_id" ref="product.product_category_5"/>
+            <field name="standard_price">0.00</field>
+            <field name="list_price">0.00</field>
+            <field name="detailed_type">consu</field>
+            <field name="sale_ok" eval="True"/>
+            <field name="purchase_ok" eval="False"/>
+
+        </record>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<odoo>-->
+<!--    <record id="setu_discount_product_1" model="product.template">-->
+<!--        <field name="name">Discount</field>-->
+<!--        <field name="categ_id" ref="product.product_category_5"/>-->
+<!--        <field name="standard_price">0.00</field>-->
+<!--        <field name="list_price">0.00</field>-->
+<!--        <field name="detailed_type">consu</field>  -->
+<!--        <field name="sale_ok" eval="True"/>-->
+<!--        <field name="purchase_ok" eval="False"/>-->
+<!--    </record>-->
+<!--</odoo>-->

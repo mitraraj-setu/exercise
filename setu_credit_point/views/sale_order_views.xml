@@ -1,0 +1,46 @@
+<odoo>
+    <record id="setu_use_credit_point_inherited_sale_order_form_quote" model="ir.ui.view">
+        <field name="name">setu_use_credit_point_inherited_sale_order_form_quote</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <field name="sale_order_template_id" position="after">
+                <field name="use_credit_point"/>
+                <field name="credit_point" invisible="use_credit_point == False"/>
+            </field>
+        </field>
+    </record>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--odoo.tools.convert.ParseError: while parsing /home/setu/workspace/odoo17/custom_addons/setu_credit_point/views/sale_order_views.xml:2
+Error while parsing or validating view:
+
+Element '<field name="sale_order_template_id">' cannot be located in parent view
+
+View error context:
+{'file': '/home/setu/workspace/odoo17/custom_addons/setu_credit_point/views/sale_order_views.xml',
+ 'line': 2,
+ 'name': 'setu_use_credit_point_inherited_view_order_form',
+ 'view': ir.ui.view(936,),
+ 'view.model': 'sale.order',
+ 'view.parent': ir.ui.view(894,),
+ 'xmlid': 'setu_use_credit_point_inherited_view_order_form'}
+-->
+
