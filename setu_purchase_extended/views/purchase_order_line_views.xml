@@ -1,0 +1,12 @@
+<odoo>
+    <record id="setu_previous_price_inherit_purchase_order_form" model="ir.ui.view">
+        <field name="name">setu_previous_price_inherit_purchase_order_form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price_unit']" position="after">
+                <field name="previous_price" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
