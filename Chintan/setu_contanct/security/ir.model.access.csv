@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_city,access_setu_city,model_setu_city,,1,1,1,1
+access_setu_state,access_setu_state,model_setu_state,,1,1,1,1
+access_setu_country,access_setu_country,model_setu_country,,1,1,1,1

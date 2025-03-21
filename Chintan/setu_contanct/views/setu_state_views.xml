@@ -1,0 +1,52 @@
+
+<odoo>
+    <record id="setu_state_view_tree" model="ir.ui.view">
+        <field name="name">setu_state_view_tree</field>
+        <field name="model">setu.state</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="country_id"/>
+                 <field name="city_ids" widget="many2many_tags" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_state_view_form" model="ir.ui.view">
+        <field name="name">setu_state_view_form</field>
+        <field name="model">setu.state</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="country_id" options="{'no_create': True}"/>
+                        <field name="city_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="City">
+                            <field name="city_ids" readonly="True">
+                                <tree >
+                                    <field name="name"/>
+                                    <field name="state_id"  optional="show"/>
+                                    <field name="country_id"  optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="setu_state_action" model="ir.actions.act_window">
+        <field name="name">State</field>
+        <field name="res_model">setu.state</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="setu_state_menu" name="State" parent="setu_configuration_menu" action="setu_state_action"/>
+</odoo>
+
+

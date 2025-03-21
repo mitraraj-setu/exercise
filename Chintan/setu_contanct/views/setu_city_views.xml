@@ -1,0 +1,48 @@
+
+<odoo>
+    <record id="setu_city_view_tree" model="ir.ui.view">
+        <field name="name">setu_city_view_tree</field>
+        <field name="model">setu.city</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="state_id"/>
+                <field name="country_id" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_city_view_form" model="ir.ui.view">
+        <field name="name">setu_city_view_form</field>
+        <field name="model">setu.city</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="state_id" options="{'no_create': True}"/>
+                        <field name="country_id" readonly="True" options="{'no_open': True}"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                   <field name="message_follower_ids" groups="base.group_user"/>
+                   <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="setu_contact_menu" name="Contact" sequence="1"/>
+
+    <menuitem id="setu_configuration_menu" name="Configuration" parent="setu_contact_menu"/>
+
+    <record id="setu_city_action" model="ir.actions.act_window">
+        <field name="name">City</field>
+        <field name="res_model">setu.city</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="setu_city_menu" name="City" parent="setu_configuration_menu" action="setu_city_action"/>
+</odoo>
+
+
