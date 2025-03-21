@@ -1,0 +1,13 @@
+<odoo>
+    <record id="setu_extra_price_inherit_view_order_form" model="ir.ui.view">
+        <field name="name">setu_extra_price_inherit_view_order_form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="after">
+                <field name="extra_price" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

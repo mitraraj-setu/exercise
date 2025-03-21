@@ -1,0 +1,16 @@
+<odoo>
+
+    <record id="setu_sale_order_import_wizard_action" model="ir.actions.act_window">
+        <field name="name">setu_sale_order_import_wizard_action</field>
+        <field name="res_model">setu.sale.order.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="setu_sale_order_import_menu"
+              name="Import Orders"
+              parent="sale.sale_order_menu"
+              sequence="50"
+              action="setu_sale_order_import_wizard_action"/>
+
+</odoo>
